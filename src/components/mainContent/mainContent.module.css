@@ -1,0 +1,31 @@
+.row {
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   margin: auto;
+   width: 90%;
+   margin-bottom: 10px;
+   border: black 1px solid;
+}
+
+.imageWrapper {
+   display: flex;
+   flex-direction: column;
+   width: 20vw;
+   height: 35vw;
+
+   border: black 1px solid;
+}
+
+.figureWrapper {
+   overflow: hidden;
+   height: 100%;
+}
+.image {
+   width: 70%;
+}
+.descWrapper {
+   display: flex;
+   justify-content: space-around;
+   height: 20px;
+}
