@@ -10,3 +10,4 @@ export const sortBy = (field, method) => {
    if (method === 'Descending') { return (a, b) => a[field] > b[field] ? 1 : -1; }
    return (a, b) => a[field] < b[field] ? 1 : -1;
 }
+

@@ -37,3 +37,18 @@
    margin: auto;
    margin-bottom: 10px;
 }
+.tag {
+   border: 1px solid white;
+   border-radius: 40%;
+   background-color: rgba(10, 95, 192, 0.945);
+   padding: 5px;
+   color: white;
+   width: 50%;
+}
+.tagWrapper {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   text-align: center;
+   align-items: center;
+}

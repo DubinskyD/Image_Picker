@@ -10,7 +10,8 @@ let initialState = {
    data: null,
    chunks: [],
 
-   tagFilterValue: ''
+   tagFilterValue: '',
+   filterCooldown: false
 }
 
 
@@ -86,14 +87,15 @@ export const commentsSortAscending = (imagesData) => {
    }
 }
 export const tagFilter = (tagFilterValue, imagesData) => {
-
-   debugger;
    let filteredImageData = imagesData.filter(item => item.tags.indexOf(tagFilterValue) !== -1)
-
    let chunks = chunkMaker(filteredImageData, 4)
    return (dispatch) => {
       dispatch(setTagFilterValue(tagFilterValue))
-      dispatch(setChunks(chunks))
+
+      setTimeout(() => {
+         dispatch(setChunks(chunks))
+      }, 300)
+
    }
 }
 

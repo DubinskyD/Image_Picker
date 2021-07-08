@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './mainContent.module.css';
+import styles from './mainContent.module.scss';
 
 
 const MainContent = (
@@ -10,7 +10,6 @@ const MainContent = (
 
    const [likesSortStatus, setLikesSortStatus] = useState(false)
    const [commentsSortStatus, setCommentsSortStatus] = useState(false)
-
 
    let sortImagesDescending = () => {
       likesSortDescending(imagesData);
@@ -31,7 +30,6 @@ const MainContent = (
 
    let onTagFilterChange = (e) => {
       tagFilter(e.currentTarget.value, imagesData)
-      console.log(e.currentTarget.value)
    }
 
    return (
@@ -59,7 +57,9 @@ const MainContent = (
                            <p>Likes - {image.likes}</p>
                            <p>Comments - {image.comments}</p>
                            {image.tags.split(',').map(tag => (
-                              <span>{tag}</span>
+                              <p className={styles.tagWrapper}>
+                                 <span className={styles.tag}>{tag}</span>
+                              </p>
                            ))}
                         </figcaption>
                      </figure>
