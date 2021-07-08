@@ -88,7 +88,7 @@ export const commentsSortAscending = (imagesData) => {
 export const tagFilter = (tagFilterValue, imagesData) => {
 
    debugger;
-   let filteredImageData = imagesData.filter(tag => tag.tags == tagFilterValue)
+   let filteredImageData = imagesData.filter(item => item.tags.indexOf(tagFilterValue) !== -1)
 
    let chunks = chunkMaker(filteredImageData, 4)
    return (dispatch) => {
