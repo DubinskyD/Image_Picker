@@ -1,25 +1,18 @@
 import { pickerAPI } from "../../api/api";
+import { chunkMaker, sortBy } from "../../utils/utils";
 
 const SET_PICKER_DATA = 'SET_PICKER_DATA';
 const SET_CHUNKS = 'SET_CHUNKS';
+const SET_TAG_FILTER_VALUE = 'SET_TAG_FILTER_VALUE';
 
 let initialState = {
    getJsonInStore: false,
    data: null,
-   chunks: []
+   chunks: [],
+
+   tagFilterValue: ''
 }
-const chunkMaker = (arr, len) => {
-   const chunks = [];
-   let i = 0;
-   while (i < arr.length) { chunks.push(arr.slice(i, i += len)) }
-   return chunks;
-}
-const sortBy = (field, method) => {
-   if (method === 'Descending') {
-      return (a, b) => a[field] > b[field] ? 1 : -1;
-   }
-   return (a, b) => a[field] < b[field] ? 1 : -1;
-}
+
 
 const pickerReducer = (state = initialState, action) => {
    switch (action.type) {
@@ -34,13 +27,22 @@ const pickerReducer = (state = initialState, action) => {
             ...state,
             chunks: [...action.chunks]
          }
+      case SET_TAG_FILTER_VALUE:
+
+         return {
+            ...state,
+            tagFilterValue: action.tagFilterValue
+         }
       default:
          return state;
    }
 }
 
+
+//action creators
 export const setPickerData = (data) => ({ type: SET_PICKER_DATA, data }) // save full data response 
 export const setChunks = (chunks) => ({ type: SET_CHUNKS, chunks }) // chunk [[by 4 img Data in each]] 
+export const setTagFilterValue = (tagFilterValue) => ({ type: SET_TAG_FILTER_VALUE, tagFilterValue })
 
 export const getPickerData = () => {
    return async (dispatch) => {
@@ -83,7 +85,17 @@ export const commentsSortAscending = (imagesData) => {
       dispatch(setChunks(chunks))
    }
 }
+export const tagFilter = (tagFilterValue, imagesData) => {
 
+   debugger;
+   let filteredImageData = imagesData.filter(tag => tag.tags == tagFilterValue)
+
+   let chunks = chunkMaker(filteredImageData, 4)
+   return (dispatch) => {
+      dispatch(setTagFilterValue(tagFilterValue))
+      dispatch(setChunks(chunks))
+   }
+}
 
 
 

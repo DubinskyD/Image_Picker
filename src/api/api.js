@@ -5,7 +5,7 @@ const instance = axios.create({
    baseURL: 'https://pixabay.com/api/',
 });
 
-//https://pixabay.com/api/?key={ YOUR_KEY }&q=cats&image_type=all&per_page=100      base 
+//https://pixabay.com/api/?key={ YOUR_KEY }&q=cats&image_type=all&per_page=100      example
 
 export const pickerAPI = {
    getImageData(search = 'cats', image_type = 'all', per_page = 100, key = '22401842-d5b7a211319aed0fd2006f20b') {
