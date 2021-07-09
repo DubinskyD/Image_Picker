@@ -34,40 +34,49 @@ const MainContent = (
    return (
       <>
          <div className={styles.filterWrapper}>
-            <input placeholder='tag filter' onKeyUp={onTagFilterChange}></input>
-            {likesSortStatus
-               ? <button onClick={sortImagesDescending}>Likes sort Descending</button>
-               : <button onClick={sortImagesAscending}>Likes sort Ascending</button>
-            }
-            {commentsSortStatus
-               ? <button onClick={sortCommentsDescending}>Comments sort Descending</button>
-               : <button onClick={sortCommentsAscending}>Comments sort Ascending</button>
-            }
+            <input placeholder='Tag Filter' onKeyUp={onTagFilterChange}></input>
+
+            <div className={styles.sortWrapper}>
+               <span className={styles.sortTitle}>Sort by: </span>
+               {likesSortStatus
+                  ? <button onClick={sortImagesDescending}>Likes &#129043;</button>
+                  : <button onClick={sortImagesAscending}>Likes &#129045; </button>
+               }
+               {commentsSortStatus
+                  ? <button onClick={sortCommentsDescending}>Comments &#129043;</button>
+                  : <button onClick={sortCommentsAscending}>Comments &#129045;</button>
+               }
+            </div>
+
          </div>
-         {imageChunks.map(chunk => (
-            <div className={styles.row}>
-               {chunk.map(image => (
-                  <div className={styles.imageWrapper}>
-                     <figure className={styles.figureWrapper}>
-                        <a href={image.pageURL}>
-                           <img className={styles.image} src={image.webformatURL} alt="awsome cat" />
-                        </a>
-                        <figcaption>
-                           <p>Likes - {image.likes}</p>
-                           <p>Comments - {image.comments}</p>
+         <div className={styles.mainContentWrapper}>
+            {imageChunks.map((chunk, idx) => (
+               <div key={idx} className={styles.row}>
+                  {chunk.map(image => (
+                     <div key={image.id} className={styles.elementWrapper}>
+                        <figure >
+                           <div className={styles.imageWrapper}>
+                              <a href={image.pageURL}>
+                                 <img className={styles.image} src={image.webformatURL} alt="awsome cat" />
+                              </a>
+                           </div>
+                           <figcaption>
+                              <p><span>Likes: </span>{image.likes}</p>
+                              <p><span>Comments: </span>{image.comments}</p>
+                           </figcaption>
                            <p className={styles.tagWrapper}>
                               {image.tags.split(',').map(tag => (
-
-                                 <span className={styles.tag}>{tag}</span>
-
+                                 <span key={tag} className={styles.tag}>{tag}</span>
                               ))}
                            </p>
-                        </figcaption>
-                     </figure>
-                  </div>
-               ))}
-            </div>
-         ))}
+                        </figure>
+                     </div>
+                  ))}
+               </div>
+            ))}
+
+         </div>
+
       </>
    )
 }
