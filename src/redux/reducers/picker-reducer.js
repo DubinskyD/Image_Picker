@@ -91,11 +91,7 @@ export const tagFilter = (tagFilterValue, imagesData) => {
    let chunks = chunkMaker(filteredImageData, 4)
    return (dispatch) => {
       dispatch(setTagFilterValue(tagFilterValue))
-
-      setTimeout(() => {
-         dispatch(setChunks(chunks))
-      }, 300)
-
+      dispatch(setChunks(chunks))
    }
 }
 

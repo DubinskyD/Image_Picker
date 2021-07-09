@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './mainContent.module.scss';
+import { debounced } from '../../utils/utils';
 
 
 const MainContent = (
@@ -28,9 +29,7 @@ const MainContent = (
       setCommentsSortStatus(true);
    }
 
-   let onTagFilterChange = (e) => {
-      tagFilter(e.currentTarget.value, imagesData)
-   }
+   let onTagFilterChange = event => debounced(e => tagFilter(e.target.value, imagesData), 300)(event)
 
    return (
       <>
@@ -56,11 +55,13 @@ const MainContent = (
                         <figcaption>
                            <p>Likes - {image.likes}</p>
                            <p>Comments - {image.comments}</p>
-                           {image.tags.split(',').map(tag => (
-                              <p className={styles.tagWrapper}>
+                           <p className={styles.tagWrapper}>
+                              {image.tags.split(',').map(tag => (
+
                                  <span className={styles.tag}>{tag}</span>
-                              </p>
-                           ))}
+
+                              ))}
+                           </p>
                         </figcaption>
                      </figure>
                   </div>

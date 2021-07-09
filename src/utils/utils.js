@@ -11,3 +11,14 @@ export const sortBy = (field, method) => {
    return (a, b) => a[field] < b[field] ? 1 : -1;
 }
 
+export const debounced = function debounce(fn, ms) {
+   let isCooldown = false;
+   return function () {
+      if (isCooldown) return;
+      isCooldown = true;
+      setTimeout(() => {
+         isCooldown = false;
+         fn.apply(this, arguments);
+      }, ms);
+   }
+};
